@@ -41,12 +41,23 @@ public class Game {
   public void initialDeal() {
 
     // deal first round of cards, players first
-    playerHand.add(deck.draw());
-    dealerHand.add(deck.draw());
+    dealHand();
 
     // deal next round of cards
-    playerHand.add(deck.draw());
+    dealHand();
+  }
+
+  private void dealHand() {
+    drawCardIntoPlayerHand();
+    drawCardIntoDealerHand();
+  }
+
+  private void drawCardIntoDealerHand() {
     dealerHand.add(deck.draw());
+  }
+
+  private void drawCardIntoPlayerHand() {
+    playerHand.add(deck.draw());
   }
 
   public void play() {
@@ -59,10 +70,8 @@ public class Game {
         break;
       }
       if (playerChoice.startsWith("h")) {
-        playerHand.add(deck.draw());
-        if (handValueOf(playerHand) > 21) {
-          playerBusted = true;
-        }
+        drawCardIntoPlayerHand();
+        playerBusted = isPlayerBusted();
       } else {
         System.out.println("You need to [H]it or [S]tand");
       }
@@ -71,7 +80,7 @@ public class Game {
     // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
     if (!playerBusted) {
       while (handValueOf(dealerHand) <= 16) {
-        dealerHand.add(deck.draw());
+        drawCardIntoDealerHand();
       }
     }
 
@@ -88,6 +97,10 @@ public class Game {
     } else {
       System.out.println("You lost to the Dealer. 💸");
     }
+  }
+
+  private boolean isPlayerBusted() {
+    return handValueOf(playerHand) > 21;
   }
 
   public int handValueOf(List<Card> hand) {
