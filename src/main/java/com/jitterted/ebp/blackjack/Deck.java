@@ -8,8 +8,25 @@ public class Deck {
   private final List<Card> cards = new ArrayList<>();
 
   public Deck() {
-    var cardValues = List.of("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K");
-    var suits = List.of("♠", "♦", "♥", "♣");
+    List<String> cardValues = new ArrayList<>();
+    cardValues.add("A");
+    cardValues.add("2");
+    cardValues.add("3");
+    cardValues.add("4");
+    cardValues.add("5");
+    cardValues.add("6");
+    cardValues.add("7");
+    cardValues.add("8");
+    cardValues.add("9");
+    cardValues.add("10");
+    cardValues.add("J");
+    cardValues.add("Q");
+    cardValues.add("K");
+    List<String> suits = new ArrayList<>();
+    suits.add("♠");
+    suits.add("♦");
+    suits.add("♥");
+    suits.add("♣");
     for (String suit : suits) {
       for (String cardValue : cardValues) {
         cards.add(new Card(suit, cardValue));
