@@ -22,12 +22,8 @@ public class Deck {
     cardValues.add("J");
     cardValues.add("Q");
     cardValues.add("K");
-    List<String> suits = new ArrayList<>();
-    suits.add("♠");
-    suits.add("♦");
-    suits.add("♥");
-    suits.add("♣");
-    for (String suit : suits) {
+
+    for (Suit suit : Suit.values()) {
       for (String cardValue : cardValues) {
         cards.add(new Card(suit, cardValue));
       }
