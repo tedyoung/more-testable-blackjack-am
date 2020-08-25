@@ -129,20 +129,33 @@ public class Game {
   }
 
   private void displayGameState() {
-    System.out.print(ansi().eraseScreen().cursor(1, 1));
-    System.out.println("Dealer has: ");
-    System.out.println(dealerHand.get(0).display()); // first card is Face Up
-
-    // second card is the hole card, which is hidden
-    displayBackOfCard();
-
-    System.out.println();
-    System.out.println("Player has: ");
-    displayHand(playerHand);
-    System.out.println(" (" + handValueOf(playerHand) + ")");
+    clearScreen();
+    displayDealerHand();
+    displayPlayerHand();
   }
 
-  private void displayBackOfCard() {
+  private void displayFinalGameState() {
+    clearScreen();
+    displayFinalDealerHand();
+    displayPlayerHand();
+  }
+
+  private void displayDealerHand() {
+    displayDealerUpCard();
+    displayDealerHoleCard();
+  }
+
+  private void displayDealerUpCard() {
+    System.out.println("Dealer has: ");
+    System.out.println(dealerHand.get(0).display()); // first card is Face Up
+  }
+
+  private void clearScreen() {
+    System.out.print(ansi().eraseScreen().cursor(1, 1));
+  }
+  // second card is the hole card, which is hidden
+
+  private void displayDealerHoleCard() {
     System.out.print(
         ansi()
             .cursorUp(7)
@@ -163,12 +176,13 @@ public class Game {
                                ansi().cursorUp(6).cursorRight(1).toString())));
   }
 
-  private void displayFinalGameState() {
-    System.out.print(ansi().eraseScreen().cursor(1, 1));
+  private void displayFinalDealerHand() {
     System.out.println("Dealer has: ");
     displayHand(dealerHand);
     System.out.println(" (" + handValueOf(dealerHand) + ")");
+  }
 
+  private void displayPlayerHand() {
     System.out.println();
     System.out.println("Player has: ");
     displayHand(playerHand);
