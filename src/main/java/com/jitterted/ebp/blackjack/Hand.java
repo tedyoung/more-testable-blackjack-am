@@ -32,10 +32,6 @@ public class Hand {
     return handValue;
   }
 
-  public Card get(int i) {
-    return cards.get(i);
-  }
-
   void displayHand() {
     System.out.println(cards
                            .stream()
@@ -46,5 +42,17 @@ public class Hand {
 
   public boolean isBusted() {
     return value() > 21;
+  }
+
+  boolean beats(Hand hand) {
+    return hand.value() < value();
+  }
+
+  boolean pushesWith(Hand hand) {
+    return hand.value() == value();
+  }
+
+  String displayFirstCard() {
+    return cards.get(0).display();
   }
 }

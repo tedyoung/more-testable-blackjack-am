@@ -87,9 +87,9 @@ public class Game {
       System.out.println("You Busted, so you lose.  💸");
     } else if (dealerHand.isBusted()) {
       System.out.println("Dealer went BUST, Player wins! Yay for you!! 💵");
-    } else if (dealerHand.value() < playerHand.value()) {
+    } else if (playerHand.beats(dealerHand)) {
       System.out.println("You beat the Dealer! 💵");
-    } else if (dealerHand.value() == playerHand.value()) {
+    } else if (playerHand.pushesWith(dealerHand)) {
       System.out.println("Push: The house wins, you Lose. 💸");
     } else {
       System.out.println("You lost to the Dealer. 💸");
@@ -121,7 +121,7 @@ public class Game {
 
   private void displayDealerUpCard() {
     System.out.println("Dealer has: ");
-    System.out.println(dealerHand.get(0).display()); // first card is Face Up
+    System.out.println(dealerHand.displayFirstCard()); // first card is Face Up
   }
 
   private void clearScreen() {
